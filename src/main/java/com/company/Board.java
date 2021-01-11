@@ -20,7 +20,7 @@ public class Board {
         boardArray[3] = new GUI_Street("Hvidovrevej", "Pris:  1200", "Hvidovrevej", "Leje:  50", new Color(75, 155, 225), Color.BLACK);
         boardArray[4] = new GUI_Tax("Betal\nindkomst-\nskat", "10% el. 4000", "Betal indkomstskat\n10% eller kr. 4000,-", Color.GRAY, Color.BLACK);
         boardArray[5] = new GUI_Shipping("default", "Øresund", "Pris:  4000", "Øresundsredderiet", "Leje:  500", Color.WHITE, Color.BLACK);
-        boardArray[6] = new GUI_Street("Roskildevej", "Pris:  2000", "Roskildevej", "Leje:  100"'', new Color(255, 135, 120), Color.BLACK);
+        boardArray[6] = new GUI_Street("Roskildevej", "Pris:  2000", "Roskildevej", "Leje:  100", new Color(255, 135, 120), Color.BLACK);
         boardArray[7] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
         boardArray[8] = new GUI_Street("Valby\nLanggade", "Pris:  2000", "Valby Langgade", "Leje:  100", new Color(255, 135, 120), Color.BLACK);
         boardArray[9] = new GUI_Street("Allégade", "Pris:  2400", "Allégade", "Leje:  150", new Color(255, 135, 120), Color.BLACK);
