@@ -15,7 +15,7 @@ public class Player {
 
     public Player(GUI gui, Color color) {
 
-        playerName = gui.getUserString("input player name")
+        playerName = gui.getUserString("input player name");
         GUI_Car car = new GUI_Car();
         car.setPrimaryColor(color);
 
