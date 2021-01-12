@@ -33,7 +33,19 @@ public class Player {
         return gui_player;
     }
 
-    public void movePlayer(int distance){
+    public void movePlayer(GUI gui Player player){
+        gui.showMessage(player[playerNr].getPlayerName() + " Kast terninger");
+        dice.rollDice();
+        gui.setDice(dice.firstDice(), dice.secondDice());
+        gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), false);
+
+        if ((carField[playerNr] + dice.getSum()) >= 40) {
+            carField[playerNr] = carField[playerNr] - 40;
+        }
+        carField[playerNr] += dice.getSum();
+
+        gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), true);
+
 
     }
 }

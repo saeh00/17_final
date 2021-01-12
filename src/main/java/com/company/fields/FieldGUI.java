@@ -1,13 +1,11 @@
 package com.company.fields;
 
-import com.company.fields.*;
 import gui_fields.*;
 import gui_main.GUI;
-import java.awt.*;
 
 public class FieldGUI {
 
-    public static void main(String[] args) {
+
         Field[] fields = {
                 new Start("Start"),
                 new Street("Rødovrevej", 1200, "Rødovrevej"),
@@ -51,10 +49,11 @@ public class FieldGUI {
                 new Street("Rådhuspladsen", 8000, "Rådhuspladsen"),
 
         };
-        GUI gui = new GUI(guiFieldsFactory(fields));
-    }
 
-    private static GUI_Field[] guiFieldsFactory(Field[] fields) {
+
+
+
+    public static GUI_Field[] guiFieldsFactory(Field[] fields) {
         GUI_Field[] gui_fields = new GUI_Field[fields.length];
         for (int i = 0; i < fields.length; i++) {
 
