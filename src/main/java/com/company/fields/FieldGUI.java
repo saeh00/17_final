@@ -6,7 +6,7 @@ import gui_main.GUI;
 public class FieldGUI {
 
 
-        Field[] fields = {
+        public static Field[] fields = {
                 new Start("Start"),
                 new Street("Rødovrevej", 1200, "Rødovrevej"),
                 new Chance("string waow"),

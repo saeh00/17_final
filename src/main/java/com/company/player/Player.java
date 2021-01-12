@@ -32,7 +32,7 @@ public class Player {
     public GUI_Player getGui_player() {
         return gui_player;
     }
-
+/*
     public void movePlayer(GUI gui Player player){
         gui.showMessage(player[playerNr].getPlayerName() + " Kast terninger");
         dice.rollDice();
@@ -48,4 +48,6 @@ public class Player {
 
 
     }
+
+ */
 }

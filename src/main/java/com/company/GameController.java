@@ -8,16 +8,17 @@ import gui_main.GUI;
 import java.awt.*;
 
 public class GameController {
-    static Board board = new Board();
 
     private Player[] player;
     private String numberPlayers;
+    private GUI gui;
 
-    gui = new GUI(FieldGUI.fields.guiFieldsFactory());
-
-    FieldGUI
+    public GameController(GUI gui) {
+        this.gui = gui;
+    }
 
     public void boardSetup() {
+
 
         numberPlayers = gui.getUserSelection("Antal spillere:", "2", "3", "4", "5", "6");
         player = new Player[Integer.parseInt(numberPlayers)];
@@ -30,11 +31,14 @@ public class GameController {
 
     }
 
+
+
     public static void main(String[] args) {
 
-        GUI.setNull_fields_allowed(true);
+        GameController controller = new GameController(new GUI(FieldGUI.guiFieldsFactory(FieldGUI.fields)));
 
-        board.createBoard();
+        controller.boardSetup();
+
     }
 
 }
