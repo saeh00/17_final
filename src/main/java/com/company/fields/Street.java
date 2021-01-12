@@ -2,6 +2,8 @@ package com.company.fields;
 
 import com.company.player.Player;
 
+import java.awt.*;
+
 public class Street extends Field {
 
     int price;
