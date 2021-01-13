@@ -1,17 +1,30 @@
 package com.company;
 
 import com.company.fields.FieldGUI;
+import com.company.player.Player;
 import gui_main.GUI;
 
 public class Main {
 
+    private Player[] player;
+
     public static void main(String[] args) {
-        GameController controller = new GameController(new GUI(FieldGUI.guiFieldsFactory(FieldGUI.fields)));
+        GUI gui = new GUI(FieldGUI.guiFieldsFactory(FieldGUI.fields));
 
-        controller.boardSetup();
+        GameController gameController = new GameController(gui);
+        PlayerController playerController = new PlayerController(gui);
 
 
-        
+        gameController.boardSetup();
+
+        gameController.runGame();
+
+
+/*
+        playerController.movePlayer(0);
+
+ */
+
 
     }
 }

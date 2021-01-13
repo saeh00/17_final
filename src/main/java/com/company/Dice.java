@@ -22,7 +22,7 @@ public class Dice {
         return diceArray[0] == diceArray[1];
     }
 
-    public int firsDice(){
+    public int firstDice(){
         return diceArray[0];
     }
 
