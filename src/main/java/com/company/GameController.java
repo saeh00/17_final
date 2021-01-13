@@ -27,7 +27,7 @@ public class GameController {
         numberPlayers = gui.getUserSelection("Antal spillere:", "2", "3", "4", "5", "6");
         player = new Player[Integer.parseInt(numberPlayers)];
         for (int i = 0; i < player.length; i++) {
-            Color colors;
+            Color colors = null;
             String color = gui.getUserSelection(player[i].getPlayerName() + " vælg en farve", "Blå", "Rød", "Gul", "Grøn", "Hvid", "Sort");
             switch (color) {
                 case "Blå":
@@ -37,16 +37,20 @@ public class GameController {
                     colors = Color.RED;
                     break;
                 case "Gul":
+                    colors = Color.yellow;
                     break;
                 case "Grøn":
+                    colors = Color.green;
                     break;
                 case "Hvid":
+                    colors = Color.white;
                     break;
                 case "Sort":
+                    colors = Color.BLACK;
                     break;
 
             }
-            player[i] = new Player(gui, Color.BLACK);
+            player[i] = new Player(gui, colors);
             gui.addPlayer(player[i].getGui_player());
             gui.getFields()[0].setCar(player[i].getGui_player(), true);
         }
