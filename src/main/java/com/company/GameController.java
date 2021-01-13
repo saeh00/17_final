@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.fields.Field;
 import com.company.fields.FieldGUI;
+import com.company.fields.Street;
 import com.company.player.Player;
 import gui_main.GUI;
 
