@@ -14,6 +14,7 @@ public class GameController {
     private GUI gui;
     private int[] carField = new int[5];
     private int turn = 0;
+    private int[] tempCarField = new int[5];
 
     Dice dice = new Dice();
 
@@ -23,12 +24,11 @@ public class GameController {
 
     public void boardSetup() {
 
-
         numberPlayers = gui.getUserSelection("Antal spillere:", "2", "3", "4", "5", "6");
         player = new Player[Integer.parseInt(numberPlayers)];
         for (int i = 0; i < player.length; i++) {
             Color colors = null;
-            String color = gui.getUserSelection(player[i].getPlayerName() + " vælg en farve", "Blå", "Rød", "Gul", "Grøn", "Hvid", "Sort");
+            String color = gui.getUserSelection("Vælg en farve", "Blå", "Rød", "Gul", "Grøn", "Hvid", "Sort");
             switch (color) {
                 case "Blå":
                     colors = Color.BLUE;
@@ -62,6 +62,7 @@ public class GameController {
         dice.rollDice();
         gui.setDice(dice.firstDice(), dice.secondDice());
         gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), false);
+        tempCarField[playerNr] = carField[playerNr];
 
         if ((carField[playerNr] + dice.getSum()) >= 40) {
             carField[playerNr] = carField[playerNr] - 40;
@@ -72,6 +73,16 @@ public class GameController {
 
     }
 
+    public void checkIfPassedStart(int playerNr) {
+        if (carField[playerNr] < tempCarField[playerNr]) {
+            gui.showMessage("You recieved 10000 congrats");
+
+            player[playerNr].getGui_player().setBalance(player[playerNr].getGui_player().getBalance() + 10000);
+
+        }
+
+    }
+
     public void runGame() {
         switch (Integer.parseInt(numberPlayers)) {
             case 3:
@@ -79,16 +90,18 @@ public class GameController {
                     switch (turn) {
                         case 0:
                             movePlayer(turn);
+                            checkIfPassedStart(turn);
                             turn = 1;
                         case 1:
                             movePlayer(turn);
+                            checkIfPassedStart(turn);
                             turn = 2;
                         case 2:
                             movePlayer(turn);
+                            checkIfPassedStart(turn);
                             turn = 0;
                     }
                 }
-
 
             case 4:
                 switch (turn) {
@@ -106,15 +119,6 @@ public class GameController {
 
             case 6:
         }
-    }
-
-
-    public static void main(String[] args) {
-
-        GameController controller = new GameController(new GUI(FieldGUI.guiFieldsFactory(FieldGUI.fields)));
-
-        controller.boardSetup();
-
     }
 
 }
