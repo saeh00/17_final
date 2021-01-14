@@ -53,8 +53,6 @@ public class FieldGUI {
         };
 
 
-
-
     public static GUI_Field[] guiFieldsFactory(Field[] fields) {
         GUI_Field[] gui_fields = new GUI_Field[fields.length];
         for (int i = 0; i < fields.length; i++) {

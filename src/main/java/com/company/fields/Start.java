@@ -10,8 +10,5 @@ public class Start extends Field {
         super(name, fgcolor, bgcolor);
     }
 
-    @Override
-    public void landOn(Player playerName) {
-        super.landOn(playerName);
-    }
+
 }

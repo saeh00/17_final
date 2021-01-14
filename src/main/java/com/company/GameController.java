@@ -18,6 +18,7 @@ public class GameController {
     private int[] tempCarField = new int[5];
 
     Dice dice = new Dice();
+    private Object Field;
 
     public GameController(GUI gui) {
         this.gui = gui;
@@ -72,6 +73,8 @@ public class GameController {
 
         gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), true);
 
+        landOn(FieldGUI.fields[carField[playerNr]],player[playerNr] );
+
     }
 
     public void checkIfPassedStart(int playerNr) {
@@ -83,6 +86,25 @@ public class GameController {
         }
 
     }
+
+    public void landOn(Field field, Player player){
+        if (field instanceof Street){
+            if (((Street) field).isOwned() == true) {
+                ((Street) field).isOwned();
+            } else {
+                if (gui.getUserLeftButtonPressed("Vil du købe denne grund","Ja","Nej")){
+                    ((Street) field).setOwned(true);
+                    player.getGui_player().setBalance(player.getGui_player().getBalance()-((Street) field).getPrice());
+                }
+            }
+        } else {
+            gui.showMessage("Feltet er allerede ejet");
+
+        }
+
+    }
+
+
 
     public void runGame() {
         switch (Integer.parseInt(numberPlayers)) {

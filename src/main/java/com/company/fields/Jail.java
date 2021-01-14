@@ -14,9 +14,4 @@ public class Jail extends Field{
     }
 
 
-    @Override
-    public void landOn(Player playerName) {
-        super.landOn(playerName);
-        System.out.println("det her er habez");
-    }
 }

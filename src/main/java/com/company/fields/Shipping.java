@@ -16,9 +16,4 @@ public class Shipping extends Field{
         this.subText = subText;
     }
 
-    @Override
-    public void landOn(Player playerName) {
-        super.landOn(playerName);
-        System.out.println("det her er shipping");
-    }
 }

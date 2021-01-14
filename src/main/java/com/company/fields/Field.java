@@ -17,8 +17,8 @@ public abstract class Field {
         this.bgcolor = bgcolor;
     }
 
-    public void landOn(Player playerName){
-        System.out.println(playerName + " is here");
+    public Class landOn(Player playerName){
+        return this.getClass();
 
     }
 }

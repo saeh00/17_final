@@ -38,9 +38,4 @@ public class Tax extends Field{
 
     }
 
-    @Override
-    public void landOn(Player playerName) {
-        super.landOn(playerName);
-        System.out.println("pay your debt " + getTaxFee());
-    }
 }
