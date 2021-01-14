@@ -73,7 +73,7 @@ public class GameController {
 
         gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), true);
 
-        landOn(FieldGUI.fields[carField[playerNr]],player[playerNr] );
+        landOn(FieldGUI.fields[carField[playerNr]], player[playerNr]);
 
     }
 
@@ -87,23 +87,23 @@ public class GameController {
 
     }
 
-    public void landOn(Field field, Player player){
-        if (field instanceof Street){
-            if (((Street) field).isOwned() == true) {
-                ((Street) field).isOwned();
-            } else {
-                if (gui.getUserLeftButtonPressed("Vil du købe denne grund","Ja","Nej")){
+    public void landOn(Field field, Player player) {
+        if (field instanceof Street) {
+            if (((Street) field).isOwned() == false) {
+                if (gui.getUserLeftButtonPressed("Vil du købe denne grund", "Ja", "Nej")) {
                     ((Street) field).setOwned(true);
-                    player.getGui_player().setBalance(player.getGui_player().getBalance()-((Street) field).getPrice());
+                    player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Street) field).getPrice());
+                } else {
+                    ((Street) field).isOwned();
                 }
+
+            } else {
+                gui.showMessage("Feltet er allerede ejet");
             }
-        } else {
-            gui.showMessage("Feltet er allerede ejet");
 
         }
 
     }
-
 
 
     public void runGame() {
