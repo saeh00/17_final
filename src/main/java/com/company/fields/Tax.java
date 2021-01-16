@@ -1,7 +1,5 @@
 package com.company.fields;
 
-import com.company.player.Player;
-
 import java.awt.*;
 
 public class Tax extends Field{

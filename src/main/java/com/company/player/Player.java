@@ -10,8 +10,8 @@ import java.awt.*;
 public class Player {
 
     private final GUI_Player gui_player;
-
     private final String playerName;
+    private boolean isOwner = false;
 
     public Player(GUI gui, Color color) {
 
@@ -19,7 +19,7 @@ public class Player {
         GUI_Car car = new GUI_Car();
         car.setPrimaryColor(color);
 
-        gui_player = new GUI_Player(playerName,30000,car);
+        gui_player = new GUI_Player(playerName, 30000, car);
 
         gui.addPlayer(gui_player);
 
@@ -33,24 +33,11 @@ public class Player {
         return gui_player;
     }
 
-    /*
-    public void movePlayer(GUI gui Player player){
-        gui.showMessage(player[playerNr].getPlayerName() + " Kast terninger");
-        dice.rollDice();
-        gui.setDice(dice.firstDice(), dice.secondDice());
-        gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), false);
-
-        if ((carField[playerNr] + dice.getSum()) >= 40) {
-            carField[playerNr] = carField[playerNr] - 40;
-        }
-        carField[playerNr] += dice.getSum();
-
-        gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), true);
-
-
+    public boolean isOwner() {
+        return isOwner;
     }
 
-     */
-
-
+    public void setOwner(boolean owner) {
+        isOwner = owner;
+    }
 }

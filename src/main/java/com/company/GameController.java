@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.fields.*;
 import com.company.player.Player;
+import gui_fields.GUI_Ownable;
 import gui_main.GUI;
 
 import java.awt.*;
@@ -14,6 +15,8 @@ public class GameController {
     private int[] carField = new int[5];
     private int turn = 0;
     private int[] tempCarField = new int[5];
+    //private Player[] isOwner;
+    private Player isOwner;
 
     Dice dice = new Dice();
     private Object Field;
@@ -71,7 +74,7 @@ public class GameController {
 
         gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), true);
 
-        landOn(FieldGUI.fields[carField[playerNr]], player[playerNr]);
+        buyField(FieldGUI.fields[carField[playerNr]], player[playerNr], playerNr);
 
     }
 
@@ -85,18 +88,23 @@ public class GameController {
 
     }
 
-    public void landOn(Field field, Player player) {
+    public void buyField(Field field, Player player, int playerNr) {
         if (field instanceof Street) {
             if (((Street) field).isOwned() == false) {
                 if (gui.getUserLeftButtonPressed("Vil du købe denne grund", "Ja", "Nej")) {
                     ((Street) field).setOwned(true);
+                    isOwner = player;
                     player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Street) field).getPrice());
+                    GUI_Ownable ownable = (GUI_Ownable) gui.getFields()[carField[playerNr]];
+                    ownable.setBorder(player.getGui_player().getPrimaryColor());
+                    //player[playerNr] = isOwner[playerNr].setOwner(true);
                 } else {
                     ((Street) field).isOwned();
                 }
 
             } else {
                 gui.showMessage("Grunden er allerede ejet");
+                payRent(FieldGUI.fields[carField[playerNr]], player);
             }
 
         }
@@ -105,22 +113,32 @@ public class GameController {
             if (((Shipping) field).isOwned() == false) {
                 if (gui.getUserLeftButtonPressed("Vil du købe denne færge", "Ja", "Nej")) {
                     ((Shipping) field).setOwned(true);
+                    isOwner = player;
                     player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Shipping) field).getPrice());
+                    GUI_Ownable ownable = (GUI_Ownable) gui.getFields()[carField[playerNr]];
+                    ownable.setBorder(player.getGui_player().getPrimaryColor());
+                    //isOwner[playerNr].setOwner(true);
                 } else {
                     ((Shipping) field).isOwned();
                 }
 
             } else {
                 gui.showMessage("Færgen er allerede ejet");
+                payRent(FieldGUI.fields[carField[playerNr]], player);
             }
 
             if (field instanceof Brewery) {
                 if (((Brewery) field).isOwned() == false) {
                     if (gui.getUserLeftButtonPressed("Vil du købe dette brygeri", "Ja", "Nej")) {
                         ((Brewery) field).setOwned(true);
+                        isOwner = player;
                         player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Brewery) field).getPrice());
+                        GUI_Ownable ownable = (GUI_Ownable) gui.getFields()[carField[playerNr]];
+                        ownable.setBorder(player.getGui_player().getPrimaryColor());
+                        //isOwner[playerNr].setOwner(true);
                     } else {
                         ((Brewery) field).isOwned();
+                        payRent(FieldGUI.fields[carField[playerNr]], player);
                     }
 
                 } else {
@@ -131,14 +149,69 @@ public class GameController {
             }
         }
     }
-/*
-    public void payRent(){
 
+    public void payRent(Field field, Player player) {
+        if (field instanceof Street) {
+            if (((Street) field).isOwned() == true) {
+                gui.showMessage("Du har landet på et ejet felt, du skal betale leje! " + ((Street) field).getPrice());
+                player.getGui_player().setBalance(player.getGui_player().getBalance()-((Street) field).getPrice());
+                isOwner.getGui_player().setBalance(isOwner.getGui_player().getBalance()+((Street) field).getPrice());
+                System.out.println((player.isOwner()));
+                System.out.println();
+
+            }
+
+        }
     }
 
- */
+    /*
+    else {
+            ((Street) field).isOwned();
+        }
+
+    } else {
+        gui.showMessage("Grunden er allerede ejet");
+    }
+
+}
+
+if (field instanceof Shipping) {
+    if (((Shipping) field).isOwned() == false) {
+        if (gui.getUserLeftButtonPressed("Vil du købe denne færge", "Ja", "Nej")) {
+            ((Shipping) field).setOwned(true);
+            player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Shipping) field).getPrice());
+            GUI_Ownable ownable = (GUI_Ownable) gui.getFields()[carField[playerNr]];
+            ownable.setBorder(player.getGui_player().getPrimaryColor());
+        } else {
+            ((Shipping) field).isOwned();
+        }
+
+    } else {
+        gui.showMessage("Færgen er allerede ejet");
+    }
+
+    if (field instanceof Brewery) {
+        if (((Brewery) field).isOwned() == false) {
+            if (gui.getUserLeftButtonPressed("Vil du købe dette brygeri", "Ja", "Nej")) {
+                ((Brewery) field).setOwned(true);
+                player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Brewery) field).getPrice());
+                GUI_Ownable ownable = (GUI_Ownable) gui.getFields()[carField[playerNr]];
+                ownable.setBorder(player.getGui_player().getPrimaryColor());
+            } else {
+                ((Brewery) field).isOwned();
+            }
+
+        } else {
+            gui.showMessage("Bryggeriet er allerede ejet");
+        }
 
 
+    }
+}
+
+}
+
+*/
     public void runGame() {
         switch (Integer.parseInt(numberPlayers)) {
             case 3:
@@ -176,5 +249,4 @@ public class GameController {
             case 6:
         }
     }
-
 }
