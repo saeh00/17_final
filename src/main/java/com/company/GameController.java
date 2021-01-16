@@ -1,8 +1,6 @@
 package com.company;
 
-import com.company.fields.Field;
-import com.company.fields.FieldGUI;
-import com.company.fields.Street;
+import com.company.fields.*;
 import com.company.player.Player;
 import gui_main.GUI;
 
@@ -79,9 +77,9 @@ public class GameController {
 
     public void checkIfPassedStart(int playerNr) {
         if (carField[playerNr] < tempCarField[playerNr]) {
-            gui.showMessage("You recieved 10000 congrats");
+            gui.showMessage("Tillykke du har passeret start, du modtager 4000 kr.");
 
-            player[playerNr].getGui_player().setBalance(player[playerNr].getGui_player().getBalance() + 10000);
+            player[playerNr].getGui_player().setBalance(player[playerNr].getGui_player().getBalance() + 4000);
 
         }
 
@@ -98,12 +96,47 @@ public class GameController {
                 }
 
             } else {
-                gui.showMessage("Feltet er allerede ejet");
+                gui.showMessage("Grunden er allerede ejet");
             }
 
         }
 
+        if (field instanceof Shipping) {
+            if (((Shipping) field).isOwned() == false) {
+                if (gui.getUserLeftButtonPressed("Vil du købe denne færge", "Ja", "Nej")) {
+                    ((Shipping) field).setOwned(true);
+                    player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Shipping) field).getPrice());
+                } else {
+                    ((Shipping) field).isOwned();
+                }
+
+            } else {
+                gui.showMessage("Færgen er allerede ejet");
+            }
+
+            if (field instanceof Brewery) {
+                if (((Brewery) field).isOwned() == false) {
+                    if (gui.getUserLeftButtonPressed("Vil du købe dette brygeri", "Ja", "Nej")) {
+                        ((Brewery) field).setOwned(true);
+                        player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Brewery) field).getPrice());
+                    } else {
+                        ((Brewery) field).isOwned();
+                    }
+
+                } else {
+                    gui.showMessage("Bryggeriet er allerede ejet");
+                }
+
+
+            }
+        }
     }
+/*
+    public void payRent(){
+
+    }
+
+ */
 
 
     public void runGame() {
