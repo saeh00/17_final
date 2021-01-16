@@ -153,9 +153,33 @@ public class GameController {
     public void payRent(Field field, Player player) {
         if (field instanceof Street) {
             if (((Street) field).isOwned() == true) {
-                gui.showMessage("Du har landet på et ejet felt, du skal betale leje! " + ((Street) field).getPrice());
+                gui.showMessage("Du er landet på en ejet grund. Du skal derfor betale leje! " + ((Street) field).getPrice());
                 player.getGui_player().setBalance(player.getGui_player().getBalance()-((Street) field).getPrice());
                 isOwner.getGui_player().setBalance(isOwner.getGui_player().getBalance()+((Street) field).getPrice());
+                System.out.println((player.isOwner()));
+                System.out.println();
+
+            }
+
+        }
+
+        if (field instanceof Shipping) {
+            if (((Shipping) field).isOwned() == true) {
+                gui.showMessage("Du er landet på en færge der er ejet. Du skal betale leje! " + ((Shipping) field).getPrice());
+                player.getGui_player().setBalance(player.getGui_player().getBalance()-((Shipping) field).getPrice());
+                isOwner.getGui_player().setBalance(isOwner.getGui_player().getBalance()+((Shipping) field).getPrice());
+                System.out.println((player.isOwner()));
+                System.out.println();
+
+            }
+
+        }
+
+        if (field instanceof Brewery) {
+            if (((Brewery) field).isOwned() == true) {
+                gui.showMessage("Du er landet på et ejet bryggeri og skal betale leje! " + ((Brewery) field).getPrice());
+                player.getGui_player().setBalance(player.getGui_player().getBalance()-((Brewery) field).getPrice());
+                isOwner.getGui_player().setBalance(isOwner.getGui_player().getBalance()+((Brewery) field).getPrice());
                 System.out.println((player.isOwner()));
                 System.out.println();
 
