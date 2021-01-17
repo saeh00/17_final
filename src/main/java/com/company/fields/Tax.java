@@ -15,6 +15,8 @@ public class Tax extends Field{
     }
 
 
+    // Vores metoder i Tax bliver ikke benyttet, da vi ikke har implementeret det i koden
+
 
     public void setTaxFee(int taxFee) {
         this.taxFee = taxFee;
