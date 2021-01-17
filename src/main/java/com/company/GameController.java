@@ -15,7 +15,6 @@ public class GameController {
     private int[] carField = new int[5];
     private int turn = 0;
     private int[] tempCarField = new int[5];
-    //private Player[] isOwner;
     private Player isOwner;
 
     Dice dice = new Dice();
@@ -156,8 +155,6 @@ public class GameController {
                 gui.showMessage("Du er landet på en ejet grund. Du skal derfor betale leje! " + ((Street) field).getPrice());
                 player.getGui_player().setBalance(player.getGui_player().getBalance()-((Street) field).getPrice());
                 isOwner.getGui_player().setBalance(isOwner.getGui_player().getBalance()+((Street) field).getPrice());
-                System.out.println((player.isOwner()));
-                System.out.println();
 
             }
 
@@ -168,8 +165,6 @@ public class GameController {
                 gui.showMessage("Du er landet på en færge der er ejet. Du skal betale leje! " + ((Shipping) field).getPrice());
                 player.getGui_player().setBalance(player.getGui_player().getBalance()-((Shipping) field).getPrice());
                 isOwner.getGui_player().setBalance(isOwner.getGui_player().getBalance()+((Shipping) field).getPrice());
-                System.out.println((player.isOwner()));
-                System.out.println();
 
             }
 
@@ -180,62 +175,13 @@ public class GameController {
                 gui.showMessage("Du er landet på et ejet bryggeri og skal betale leje! " + ((Brewery) field).getPrice());
                 player.getGui_player().setBalance(player.getGui_player().getBalance()-((Brewery) field).getPrice());
                 isOwner.getGui_player().setBalance(isOwner.getGui_player().getBalance()+((Brewery) field).getPrice());
-                System.out.println((player.isOwner()));
-                System.out.println();
 
             }
 
         }
     }
 
-    /*
-    else {
-            ((Street) field).isOwned();
-        }
 
-    } else {
-        gui.showMessage("Grunden er allerede ejet");
-    }
-
-}
-
-if (field instanceof Shipping) {
-    if (((Shipping) field).isOwned() == false) {
-        if (gui.getUserLeftButtonPressed("Vil du købe denne færge", "Ja", "Nej")) {
-            ((Shipping) field).setOwned(true);
-            player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Shipping) field).getPrice());
-            GUI_Ownable ownable = (GUI_Ownable) gui.getFields()[carField[playerNr]];
-            ownable.setBorder(player.getGui_player().getPrimaryColor());
-        } else {
-            ((Shipping) field).isOwned();
-        }
-
-    } else {
-        gui.showMessage("Færgen er allerede ejet");
-    }
-
-    if (field instanceof Brewery) {
-        if (((Brewery) field).isOwned() == false) {
-            if (gui.getUserLeftButtonPressed("Vil du købe dette brygeri", "Ja", "Nej")) {
-                ((Brewery) field).setOwned(true);
-                player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Brewery) field).getPrice());
-                GUI_Ownable ownable = (GUI_Ownable) gui.getFields()[carField[playerNr]];
-                ownable.setBorder(player.getGui_player().getPrimaryColor());
-            } else {
-                ((Brewery) field).isOwned();
-            }
-
-        } else {
-            gui.showMessage("Bryggeriet er allerede ejet");
-        }
-
-
-    }
-}
-
-}
-
-*/
     public void runGame() {
         switch (Integer.parseInt(numberPlayers)) {
             case 3:
