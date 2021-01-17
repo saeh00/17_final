@@ -13,9 +13,9 @@ public class GameController {
     private Player[] player;
     private String numberPlayers;
     private GUI gui;
-    private int[] carField = new int[5];
+    private int[] carField = new int[6];
     private int turn = 0;
-    private int[] tempCarField = new int[5];
+    private int[] tempCarField = new int[6];
     private Player isOwner;
 
     Dice dice = new Dice();
@@ -241,6 +241,22 @@ public class GameController {
 
     public void runGame() {
         switch (Integer.parseInt(numberPlayers)) {
+            case 2:
+                while (true) {
+                    switch (turn) {
+                        case 0:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 1;
+                        case 1:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 0;
+                    }
+                }
+
             case 3:
                 while (true) {
                     switch (turn) {
@@ -263,20 +279,96 @@ public class GameController {
                 }
 
             case 4:
-                switch (turn) {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
+                while (true) {
+                    switch (turn) {
+                        case 0:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 1;
+                        case 1:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 2;
+                        case 2:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 3;
+                        case 3:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 0;
+                    }
                 }
-                break;
             case 5:
+                while (true) {
+                    switch (turn) {
+                        case 0:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 1;
+                        case 1:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 2;
+                        case 2:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 3;
+                        case 3:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 4;
+                        case 4:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 0;
+                    }
+                }
 
             case 6:
+                while (true) {
+                    switch (turn) {
+                        case 0:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 1;
+                        case 1:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 2;
+                        case 2:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 3;
+                        case 3:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 4;
+                        case 4:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 5;
+                        case 5:
+                            movePlayer(turn);
+                            checkIfPassedStart(turn);
+                            checkPlayerBalance();
+                            turn = 0;
+                    }
+                }
         }
     }
 }
