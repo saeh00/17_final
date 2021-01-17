@@ -6,6 +6,7 @@ import gui_fields.GUI_Ownable;
 import gui_main.GUI;
 
 import java.awt.*;
+import java.util.Random;
 
 public class GameController {
 
@@ -74,6 +75,7 @@ public class GameController {
         gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), true);
 
         buyField(FieldGUI.fields[carField[playerNr]], player[playerNr], playerNr);
+        chanceField(FieldGUI.fields[carField[playerNr]],playerNr);
 
     }
 
@@ -125,27 +127,26 @@ public class GameController {
                 gui.showMessage("Færgen er allerede ejet");
                 payRent(FieldGUI.fields[carField[playerNr]], player);
             }
-
-            if (field instanceof Brewery) {
-                if (((Brewery) field).isOwned() == false) {
-                    if (gui.getUserLeftButtonPressed("Vil du købe dette brygeri", "Ja", "Nej")) {
-                        ((Brewery) field).setOwned(true);
-                        isOwner = player;
-                        player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Brewery) field).getPrice());
-                        GUI_Ownable ownable = (GUI_Ownable) gui.getFields()[carField[playerNr]];
-                        ownable.setBorder(player.getGui_player().getPrimaryColor());
-                        //isOwner[playerNr].setOwner(true);
-                    } else {
-                        ((Brewery) field).isOwned();
-                        payRent(FieldGUI.fields[carField[playerNr]], player);
-                    }
-
+        }
+        if (field instanceof Brewery) {
+            if (((Brewery) field).isOwned() == false) {
+                if (gui.getUserLeftButtonPressed("Vil du købe dette brygeri", "Ja", "Nej")) {
+                    ((Brewery) field).setOwned(true);
+                    isOwner = player;
+                    player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Brewery) field).getPrice());
+                    GUI_Ownable ownable = (GUI_Ownable) gui.getFields()[carField[playerNr]];
+                    ownable.setBorder(player.getGui_player().getPrimaryColor());
+                    //isOwner[playerNr].setOwner(true);
                 } else {
-                    gui.showMessage("Bryggeriet er allerede ejet");
+                    ((Brewery) field).isOwned();
+                    payRent(FieldGUI.fields[carField[playerNr]], player);
                 }
 
-
+            } else {
+                gui.showMessage("Bryggeriet er allerede ejet");
             }
+
+
         }
     }
 
@@ -153,8 +154,8 @@ public class GameController {
         if (field instanceof Street) {
             if (((Street) field).isOwned() == true) {
                 gui.showMessage("Du er landet på en ejet grund. Du skal derfor betale leje! " + ((Street) field).getPrice());
-                player.getGui_player().setBalance(player.getGui_player().getBalance()-((Street) field).getPrice());
-                isOwner.getGui_player().setBalance(isOwner.getGui_player().getBalance()+((Street) field).getPrice());
+                player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Street) field).getPrice());
+                isOwner.getGui_player().setBalance(isOwner.getGui_player().getBalance() + ((Street) field).getPrice());
 
             }
 
@@ -163,8 +164,8 @@ public class GameController {
         if (field instanceof Shipping) {
             if (((Shipping) field).isOwned() == true) {
                 gui.showMessage("Du er landet på en færge der er ejet. Du skal betale leje! " + ((Shipping) field).getPrice());
-                player.getGui_player().setBalance(player.getGui_player().getBalance()-((Shipping) field).getPrice());
-                isOwner.getGui_player().setBalance(isOwner.getGui_player().getBalance()+((Shipping) field).getPrice());
+                player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Shipping) field).getPrice());
+                isOwner.getGui_player().setBalance(isOwner.getGui_player().getBalance() + ((Shipping) field).getPrice());
 
             }
 
@@ -173,17 +174,45 @@ public class GameController {
         if (field instanceof Brewery) {
             if (((Brewery) field).isOwned() == true) {
                 gui.showMessage("Du er landet på et ejet bryggeri og skal betale leje! " + ((Brewery) field).getPrice());
-                player.getGui_player().setBalance(player.getGui_player().getBalance()-((Brewery) field).getPrice());
-                isOwner.getGui_player().setBalance(isOwner.getGui_player().getBalance()+((Brewery) field).getPrice());
+                player.getGui_player().setBalance(player.getGui_player().getBalance() - ((Brewery) field).getPrice());
+                isOwner.getGui_player().setBalance(isOwner.getGui_player().getBalance() + ((Brewery) field).getPrice());
 
             }
 
         }
     }
 
-    public void checkPlayerBalance(){
-        for (int i = 0; i < player.length; i++){
-            if (player[i].getGui_player().getBalance() <= 0){
+    public void chanceField(Field field, int playerNr){
+        if (field instanceof Chance) {
+            gui.showMessage("Du er landet på chancefeltet");
+
+            Random rand = new Random();
+            int answer = rand.nextInt(3);
+            if (answer == 0) {
+                gui.showMessage("Ryk 3 felter frem");
+                gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), false);
+                carField[playerNr] = carField[playerNr] + 3;
+
+                gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), true);
+            } else if (answer == 1) {
+                gui.showMessage("Ryke 2 felter tilbage");
+                gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), false);
+                carField[playerNr] = carField[playerNr] - 2;
+
+                gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), true);
+            } else {
+                gui.showMessage("Ryke direkte til fængsel");
+                gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), false);
+                carField[playerNr] = 10;
+
+                gui.getFields()[carField[playerNr]].setCar(player[playerNr].getGui_player(), true);
+            }
+        }
+    }
+
+    public void checkPlayerBalance() {
+        for (int i = 0; i < player.length; i++) {
+            if (player[i].getGui_player().getBalance() <= 0) {
                 gui.showMessage(player[i].getGui_player().getName() + " er gået fallit");
 
                 getWinner();
@@ -191,14 +220,14 @@ public class GameController {
         }
     }
 
-    public void getWinner(){
+    public void getWinner() {
         int player1Balance = player[0].getGui_player().getBalance();
         String player1Name = player[0].getGui_player().getName();
         int winnerBalance;
         String winnerName = null;
 
         for (int i = 0; i < player.length; i++) {
-            if (player[i].getGui_player().getBalance() > player1Balance){
+            if (player[i].getGui_player().getBalance() > player1Balance) {
                 winnerBalance = player[i].getGui_player().getBalance();
                 winnerName = player[i].getGui_player().getName();
             }
