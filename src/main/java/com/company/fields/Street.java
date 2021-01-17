@@ -9,12 +9,14 @@ public class Street extends Field {
     int price;
     String subText;
     boolean owned;
+    int rent;
 
-    public Street(String name, int price, String subText, Color fgcolor, Color bgcolor) {
+    public Street(String name, int price, String subText, Color fgcolor, Color bgcolor, int rent) {
         super(name, fgcolor, bgcolor);
         this.price = price;
         this.subText = subText;
         this.owned = false;
+        this.rent = rent;
     }
 
     public boolean isOwned() {
@@ -33,5 +35,7 @@ public class Street extends Field {
         this.price = price;
     }
 
-
+    public int getRent() {
+        return rent;
+    }
 }

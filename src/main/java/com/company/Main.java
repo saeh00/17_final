@@ -12,18 +12,11 @@ public class Main {
         GUI gui = new GUI(FieldGUI.guiFieldsFactory(FieldGUI.fields));
 
         GameController gameController = new GameController(gui);
-        PlayerController playerController = new PlayerController(gui);
 
 
         gameController.boardSetup();
 
         gameController.runGame();
-
-
-/*
-        playerController.movePlayer(0);
-
- */
 
 
     }

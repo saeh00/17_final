@@ -9,12 +9,14 @@ public class Brewery extends Field {
     int price;
     String subText;
     boolean owned;
+    int rent;
 
-    public Brewery(String name, int price, String subText, Color fgcolor, Color bgcolor) {
+    public Brewery(String name, int price, String subText, Color fgcolor, Color bgcolor, int rent) {
         super(name, fgcolor, bgcolor);
         this.price = price;
         this.subText = subText;
         this.owned = false;
+        this.rent = rent;
     }
 
     public int getPrice() {
@@ -31,5 +33,9 @@ public class Brewery extends Field {
 
     public void setOwned(boolean owned) {
         this.owned = owned;
+    }
+
+    public int getRent() {
+        return rent;
     }
 }
