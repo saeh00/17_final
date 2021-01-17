@@ -181,6 +181,34 @@ public class GameController {
         }
     }
 
+    public void checkPlayerBalance(){
+        for (int i = 0; i < player.length; i++){
+            if (player[i].getGui_player().getBalance() <= 0){
+                gui.showMessage(player[i].getGui_player().getName() + " er gået fallit");
+
+                getWinner();
+            }
+        }
+    }
+
+    public void getWinner(){
+        int player1Balance = player[0].getGui_player().getBalance();
+        String player1Name = player[0].getGui_player().getName();
+        int winnerBalance;
+        String winnerName = null;
+
+        for (int i = 0; i < player.length; i++) {
+            if (player[i].getGui_player().getBalance() > player1Balance){
+                winnerBalance = player[i].getGui_player().getBalance();
+                winnerName = player[i].getGui_player().getName();
+            }
+        }
+        gui.showMessage(winnerName + " Har vundet spillet med den højeste med pengebeholdning");
+
+        gui.close();
+
+    }
+
 
     public void runGame() {
         switch (Integer.parseInt(numberPlayers)) {
@@ -190,14 +218,17 @@ public class GameController {
                         case 0:
                             movePlayer(turn);
                             checkIfPassedStart(turn);
+                            checkPlayerBalance();
                             turn = 1;
                         case 1:
                             movePlayer(turn);
                             checkIfPassedStart(turn);
+                            checkPlayerBalance();
                             turn = 2;
                         case 2:
                             movePlayer(turn);
                             checkIfPassedStart(turn);
+                            checkPlayerBalance();
                             turn = 0;
                     }
                 }
